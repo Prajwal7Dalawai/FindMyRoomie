@@ -1,0 +1,24 @@
+# Java / Maven
+**/target/
+*.class
+
+# Environment variables / secrets
+**/.env
+**/.env.*
+!.env.example
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Logs
+**/*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+**/application-local.properties
+**/application-prod.properties
