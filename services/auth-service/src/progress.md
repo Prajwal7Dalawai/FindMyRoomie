@@ -323,69 +323,59 @@ Implementation      ⏳ NOT STARTED
 
 ---
 
-# Next Session — August 13, 2026
 
-## 🎯 Goal: Start Auth Service Implementation
+============================================================
+  Progress — 13 August 2026
+  Auth Service
+  ============================================================
 
-### First tasks
+Completed:
 
-* [ ] Add Flyway dependency to `pom.xml`
-* [ ] Verify PostgreSQL is running
-* [ ] Create `auth_db`
-* [ ] Configure `application.properties`
-* [ ] Create `V1__create_users.sql`
-* [ ] Start `auth-service`
-* [ ] Verify Flyway migration
-* [ ] Verify `users` table creation
-* [ ] Create `User` JPA entity
-* [ ] Create `UserRepository`
+1. Database & Flyway
 
-### After that
+  - Configured PostgreSQL connection.
+  - Configured Flyway migrations.
+  - Created Auth DB tables:
+    - users
+    - auth_identities
+    - refresh_tokens
+    - login_attempts
+  - Configured Hibernate with ddl-auto=validate.
 
-```text
-Database
-   ↓
-Entity
-   ↓
-Repository
-   ↓
-Service Layer
-   ↓
-Registration API
-   ↓
-Password Hashing
-   ↓
-Login
-   ↓
-JWT
-   ↓
-Refresh Token
-   ↓
-Google OAuth
-```
 
----
+2. JPA Models
 
-# Progress History
+  - Created User model.
+  - Created AuthIdentity model.
+  - Created RefreshToken model.
+  - Created LoginAttempt model.
+  - Mapped PostgreSQL INET type for ip_address.
+  - Added entity relationships and constraints.
 
-| Date            | Day | Service      | Focus                          | Status      |
-| --------------- | --: | ------------ | ------------------------------ | ----------- |
-| August 12, 2026 |   1 | Auth Service | Architecture + DB design       | ✅ Completed |
-| August 13, 2026 |   2 | Auth Service | Flyway + PostgreSQL + Entities | ⏳ Next      |
 
----
+3. Repository Layer
 
-## Important Rule for Future Updates
+  - Created UserRepository.
+  - Created AuthIdentityRepository.
+  - Created RefreshTokenRepository.
+  - Created LoginAttemptRepository.
+  - Fixed Spring Data derived-query naming issues.
 
-**Do not remove previous daily entries.**
 
-At the end of each development session:
+4. DTO Layer
 
-1. Add a new dated section under `Daily Progress Log`.
-2. Record what was actually completed.
-3. Record important architecture decisions.
-4. Record problems encountered and their solutions.
-5. Record the next session's tasks.
-6. Update the overall progress table.
+  - Created RegisterRequest.
+  - Created LoginRequest.
+  - Created UserResponse.
+  - Created AuthResponse.
+
+
+5. Validation
+
+  - Successfully started auth-service.
+  - Verified Flyway, JPA, models, and repositories are working together.
+
+============================================================
+  
 
 This file should remain the **single source of truth for development progress**.
