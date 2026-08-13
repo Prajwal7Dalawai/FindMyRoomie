@@ -54,6 +54,18 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- Flyway -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
