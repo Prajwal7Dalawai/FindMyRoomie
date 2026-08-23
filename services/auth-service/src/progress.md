@@ -376,6 +376,42 @@ Completed:
   - Verified Flyway, JPA, models, and repositories are working together.
 
 ============================================================
-  
+
+## 📅 August 24, 2026 — Auth Service
+
+### Focus
+
+**Registration API, Spring Security Configuration & Login Credential Verification**
+
+---
+
+## 1. Registration Service
+
+- [x] Implemented `register()` in `AuthServiceImplementation`.
+- [x] Added duplicate email checking.
+- [x] Added duplicate phone-number checking.
+- [x] Used `ResourceAlreadyExistsException` for duplicate resources.
+- [x] Added `@Transactional` to the registration operation.
+- [x] Created `User` during registration.
+- [x] Set initial user status to `ACTIVE`.
+- [x] Set email verification status to `false`.
+- [x] Set phone verification status to `false`.
+- [x] Added creation and update timestamps.
+- [x] Created `AuthIdentity` for local authentication.
+- [x] Set authentication provider to `LOCAL`.
+- [x] Used email as the local `providerUserId`.
+- [x] Hashed the password using `PasswordEncoder`.
+- [x] Saved the `User` and `AuthIdentity` as part of the same transaction.
+
+---
+
+## 2. Auth Controller
+
+- [x] Created `AuthController`.
+- [x] Added registration endpoint:
+
+```text
+POST /api/auth/register
+```
 
 This file should remain the **single source of truth for development progress**.
