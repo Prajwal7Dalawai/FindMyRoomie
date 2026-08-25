@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+.env
+client_secret_17859268694-e444luhtccfi06ockcpdoe5unl19787n.apps.googleusercontent.com.json
