@@ -60,7 +60,7 @@ public class AuthServiceImplementation implements AuthService {
             user.setCreatedAt(now);
             user.setUpdatedAt(now);
 
-            userRepository.save(user);
+            user = userRepository.save(user);
 
             AuthIdentity identity = new AuthIdentity();
             identity.setUser(user);
@@ -72,7 +72,37 @@ public class AuthServiceImplementation implements AuthService {
             identity.setUpdatedAt(now);
             authIdentityRepository.save(identity);
 
-            return null;
+            String accessToken = jwtService.generateAccessToken(user.getId());
+
+            String refreshToken = refreshTokenService.generateRefreshToken();
+
+            String refreshTokenHash = refreshTokenService.hashToken(refreshToken);
+
+            RefreshToken refreshTokenEntity = new RefreshToken();
+            refreshTokenEntity.setUser(user);
+            refreshTokenEntity.setTokenHash(refreshTokenHash);
+            refreshTokenEntity.setRevoked(false);
+            refreshTokenEntity.setCreatedAt(now);
+            refreshTokenEntity.setExpiresAt(now.plusDays(30));
+
+            refreshTokenRepository.save(refreshTokenEntity);
+
+            UserResponse userResponse = new UserResponse(
+                    user.getId(),
+                    user.getEmail(),
+                    user.getPhoneNumber(),
+                    user.isEmailVerified(),
+                    user.isPhoneVerified(),
+                    user.getStatus()
+            );
+
+            return new AuthResponse(
+                    accessToken,
+                    refreshToken,
+                    "Bearer",
+                    jwtService.getAccessTokenExpiration(),
+                    userResponse
+            );
         }
 
         @Override
