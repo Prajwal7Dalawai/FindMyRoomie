@@ -1,4 +1,4 @@
-package com.example.user_service.Models;
+package com.example.user_service.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name="user_profiles")
@@ -17,7 +18,7 @@ import java.time.OffsetDateTime;
 public class UserProfile {
     @Id
     @Column(name = "user_id",nullable = false)
-    private int userId;
+    private UUID userId;
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;

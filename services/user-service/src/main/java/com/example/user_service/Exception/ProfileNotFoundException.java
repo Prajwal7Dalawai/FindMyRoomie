@@ -1,7 +1,7 @@
 package com.example.user_service.Exception;
 
-public class PageNotFoundException extends RuntimeException{
-    public PageNotFoundException(String message){
+public class ProfileNotFoundException extends RuntimeException{
+    public ProfileNotFoundException(String message){
         super(message);
     }
 }
