@@ -4,6 +4,8 @@ import com.example.auth_service.DTO.request.LoginRequest;
 import com.example.auth_service.DTO.request.RegisterRequest;
 import com.example.auth_service.DTO.response.AuthResponse;
 import com.example.auth_service.DTO.response.UserResponse;
+import com.example.auth_service.Event.UserRegisteredEvent;
+import com.example.auth_service.Kafka.UserRegisteredEventProducer;
 import com.example.auth_service.Models.AuthIdentity;
 import com.example.auth_service.Models.RefreshToken;
 import com.example.auth_service.Models.User;
@@ -35,6 +37,7 @@ public class AuthServiceImplementation implements AuthService {
         private final JwtService jwtService;
         private final RefreshTokenService refreshTokenService;
         private final RefreshTokenRepository refreshTokenRepository;
+        private final UserRegisteredEventProducer userRegisteredEventProducer;
 
 
         @Override
@@ -61,6 +64,7 @@ public class AuthServiceImplementation implements AuthService {
             user.setUpdatedAt(now);
 
             user = userRepository.save(user);
+
 
             AuthIdentity identity = new AuthIdentity();
             identity.setUser(user);
@@ -95,7 +99,7 @@ public class AuthServiceImplementation implements AuthService {
                     user.isPhoneVerified(),
                     user.getStatus()
             );
-
+            userRegisteredEventProducer.publish(new UserRegisteredEvent(user.getId(),user.getEmail()));
             return new AuthResponse(
                     accessToken,
                     refreshToken,
